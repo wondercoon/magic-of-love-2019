@@ -1,5 +1,6 @@
 var AipImageClassifyClient = require("baidu-aip-sdk").imageClassify;
 var AipOcrClient = require("baidu-aip-sdk").ocr;
+var AipNlpClient = require("baidu-aip-sdk").nlp;
 
 // 设置APPID/AK/SK
 var APP_ID = process.env.BAIDU_APP_ID;
@@ -18,6 +19,7 @@ var client = new AipImageClassifyClient(APP_ID, API_KEY, SECRET_KEY);
 
 // 新建一个对象，建议只保存一个对象调用服务接口
 var ocrClient = new AipOcrClient(APP_ID, API_KEY, SECRET_KEY);
+var nlpClient = new AipNlpClient(APP_ID, API_KEY, SECRET_KEY);
 
 module.exports = {
     searchImg: (base64img) => {
@@ -25,6 +27,9 @@ module.exports = {
     },
     ocr: (base64img) => {
         return ocrClient.generalBasic(base64img, options);
+    },
+    nlp: (txt) => {
+        return nlpClient.lexer(txt);
     }
 };
 
